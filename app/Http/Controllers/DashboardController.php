@@ -64,15 +64,49 @@ class DashboardController extends Controller
         return view('dashboard.members')->with($data);
     }
 
-    public function loans() {
+    public function loans() 
+    {
         $contributions="";
+
+        $loans = DB::table('loans')
+            ->join('members', 'loans.member_id', '=', 'members.id')
+            ->select('loans.*', 'members.full_name')
+            ->orderByDesc('loans.id')
+            ->get();
+
+            // Calculate total loans issued (sum of amount_approved)
+            $totalLoansIssued = DB::table('loans')
+            ->whereNotNull('amount_approved')
+            ->sum('amount_approved');
+
+            // Total of loans where status is 'approved'
+            $totalApprovedLoans = DB::table('loans')
+            ->where('status', 'approved')
+            ->whereNotNull('amount_approved')
+            ->sum('amount_approved');
+
+             // Total of defaulted loans
+            $totalDefaultedLoans = DB::table('loans')
+                ->where('status', 'defaulted')
+                ->whereNotNull('amount_approved')
+                ->sum('amount_approved');
+
+            $totalLoanCount = DB::table('loans')->count(); // Count of all loans issued
+
+
+
         
         $data = [
             'contributions' => $contributions,
+            'loans' => $loans,
+            'totalLoansIssued' => $totalLoansIssued,
+            'totalApprovedLoans' => $totalApprovedLoans,
+            'totalDefaultedLoans' => $totalDefaultedLoans,
+            'totalLoanCount' => $totalLoanCount,
             'stations' => "",
             'pagetitle' => "Loan Management",
         ];
-        return view('dashboard.loans')->with($data);
+        return view('dashboard.newloans')->with($data);
     }
 
     public function savings() 

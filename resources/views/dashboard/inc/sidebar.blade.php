@@ -21,10 +21,7 @@
                             <i class="fas fa-users mr-3"></i>
                             <span class="sidebar-text">Members</span>
                         </a>
-                        <a href="{{ route('loans') }}" class="flex items-center px-4 py-3 hover:bg-blue-700 rounded-lg text-white">
-                            <i class="fas fa-hand-holding-usd mr-3"></i>
-                            <span class="sidebar-text">Loans</span>
-                        </a>
+                       
                         <a href="{{ route('savings') }}" class="flex items-center px-4 py-3 hover:bg-blue-700 rounded-lg text-white">
                             <i class="fas fa-wallet mr-3"></i>
                             <span class="sidebar-text">Savings</span>
@@ -33,6 +30,21 @@
                             <i class="fas fa-file-invoice-dollar mr-3"></i>
                             <span class="sidebar-text">Savings Statement</span>
                         </a>
+                           <!-- Dropdown Start -->
+                            <div class="group">
+                                <button class="flex items-center w-full px-4 py-3 bg-blue-700 rounded-lg text-white focus:outline-none">
+                                    <i class="fas fa-hand-holding-usd mr-3"></i>
+                                    <span class="sidebar-text flex-1 text-left">Loan Management</span>
+                                    <i class="fas fa-chevron-down ml-auto"></i>
+                                </button>
+                                <div class="hidden group-hover:block ml-8 mt-2 space-y-1">
+                                    <a href="{{ route('loans') }}" class="block px-4 py-2 rounded hover:bg-blue-600 text-white">Loan Dashboard</a>
+                                    <a href="{{ route('loans.create') }}" class="block px-4 py-2 rounded hover:bg-blue-600 text-white">Loan Register</a>
+                                    <a href="{{ route('repayments.create') }}" class="block px-4 py-2 rounded hover:bg-blue-600 text-white">Loan Repayment</a>
+                                    <a href="{{ route('loans') }}" class="block px-4 py-2 rounded hover:bg-blue-600 text-white"> Loan Statement</a>
+                                </div>
+                            </div>
+                            <!-- Dropdown End -->
                         <a href="{{ route('loan.statement') }}" class="flex items-center px-4 py-3 hover:bg-blue-700 rounded-lg text-white">
                             <i class="fas fa-file-invoice mr-3"></i>
                             <span class="sidebar-text">Loan Statement</span>
