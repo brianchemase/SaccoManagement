@@ -10,19 +10,37 @@ class DashboardController extends Controller
 {
     //
 
-    public function dashboard() {
+    public function dashboard() 
+    {
         
         $contributions="";
+        // Count members by status
+        $statusCounts = DB::table('members')
+        ->select('status', DB::raw('count(*) as total'))
+        ->groupBy('status')
+        ->pluck('total', 'status');
+
+         // Total savings (deposits)
+         $totalSavings = DB::table('savings')
+         ->where('transaction_type', 'deposit')
+         ->sum('amount');
+
+        
+
+
         
         $data = [
             'contributions' => $contributions,
             'stations' => "",
             'pagetitle' => "Dashboard Home page",
+            'statusCounts' => $statusCounts,
+            'totalSavings' => $totalSavings,
         ];
         return view('dashboard.home')->with($data);
     }
 
-    public function members() {
+    public function members() 
+    {
         $contributions="";
         $members = DB::table('members')->get();
 
@@ -57,7 +75,8 @@ class DashboardController extends Controller
         return view('dashboard.loans')->with($data);
     }
 
-    public function savings() {
+    public function savings() 
+    {
 
         $now = Carbon::now();
         $startOfMonth = $now->copy()->startOfMonth();
@@ -109,6 +128,7 @@ class DashboardController extends Controller
         
         $data = [
             'contributions' => $contributions,
+            'now' => $now,
             'savings' => $savings,
             'members' => $members,
             'stations' => "",

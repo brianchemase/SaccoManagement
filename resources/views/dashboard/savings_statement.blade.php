@@ -74,23 +74,25 @@
                 <!-- Sample Statement -->
                 <div id="statementPreview" class="bg-white rounded-xl shadow-sm p-6 ">
                     <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-lg font-semibold text-gray-800">Savings Statement</h2>
-                        <button id="printStatementBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center">
+                        <h2 class="text-lg no-print font-semibold text-gray-800">Savings Statement</h2>
+                        <button id="printStatementBtn" class="no-print px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center">
                             <i class="fas fa-print mr-2"></i> Print Statement
                         </button>
                     </div>
                     
                     <!-- Statement Header -->
                     <div class="statement-container rounded-lg overflow-hidden mb-6">
-                        <div class="statement-header p-6">
-                            <div class="flex justify-between items-start">
+                        
+                        <div class="statement-header p-6 text-center">
+                            <div class="flex flex-col items-center justify-center space-y-4">
+                                <div>
+                                    <img src="https://portal.sucdiagency.com/logo/logo.png" alt="Logo" class="h-12 mx-auto">
+                                </div>
                                 <div>
                                     <h1 class="text-2xl font-bold">SACCO NAME SAVINGS STATEMENT</h1>
-                                    <p class="mt-2">Generated on: <span id="generationDate" class="font-medium">June 20, 2023</span></p>
+                                    <p class="mt-2">Generated on: <span id="generationDate" class="font-medium">{{ $now->toDayDateTimeString() }}</span></p>
                                 </div>
-                                <div class="text-right">
-                                    <img src="https://via.placeholder.com/100x50?text=SaccoPro" alt="Logo" class="h-12">
-                                </div>
+                                
                             </div>
                         </div>
                         
@@ -99,30 +101,35 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <h3 class="text-lg font-semibold text-gray-800 mb-2">Member Information</h3>
-                                    <p class="text-gray-600"><span class="font-medium">Name:</span> <span id="memberName">{{ $member->full_name ?? 'N/A' }}
+                                    <p class="text-gray-600"><span class="font-medium">Name:</span> <span id="memberName">{{ $member->full_name ?? 'N/A' }} </p>
                                     <p class="text-gray-600"><span class="font-medium">Member ID:</span> <span id="memberId">{{ $member->id_number ?? 'N/A' }}</span></p>
                                     
                                 </div>
-                                <div>
-                                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Statement Period</h3>
-                                    <p class="text-gray-600"><span id="statementStartDate">{{ $fromDate ? \Carbon\Carbon::parse($fromDate)->toFormattedDateString() : 'N/A' }}</span></p>
-                                    <p class="text-gray-600"><span id="statementEndDate">{{ $toDate ? \Carbon\Carbon::parse($toDate)->toFormattedDateString() : 'N/A' }}</span></p>
-                                </div>
+                              
+
+                                @if($fromDate && $toDate)
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Statement Period</h3>
+                                        <p class="text-gray-600">
+                                            <span id="statementStartDate">{{ \Carbon\Carbon::parse($fromDate)->toFormattedDateString() }}</span>
+                                        </p>
+                                        <p class="text-gray-600">
+                                            <span id="statementEndDate">{{ \Carbon\Carbon::parse($toDate)->toFormattedDateString() }}</span>
+                                        </p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         
                         <!-- Account Summary -->
                         <div class="p-6 border-b">
                             <h3 class="text-lg font-semibold text-gray-800 mb-4">Account Summary</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <div class="bg-gray-50 p-4 rounded-lg">
                                     <p class="text-sm text-gray-500">Total Savings</p>
                                     <p class="text-xl font-bold text-gray-800">KSH {{ number_format($totalDeposits, 2) }}</p>
                                 </div>
-                                <div class="bg-gray-50 p-4 rounded-lg">
-                                    <p class="text-sm text-gray-500">Total Withdrawals</p>
-                                    <p class="text-xl font-bold text-green-600">$6,950.00</p>
-                                </div>
+                                
                                 <div class="bg-gray-50 p-4 rounded-lg">
                                     <p class="text-sm text-gray-500">Total Withdrawals</p>
                                     <p class="text-xl font-bold text-red-600">KSH {{ number_format($totalWithdrawals, 2) }}</p>
@@ -136,13 +143,12 @@
                         
                         <!-- Transaction Details -->
                         <div class="p-6">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Transaction Details</h3>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Transaction Summary</h3>
                             <div class="overflow-x-auto">
                                 <table class="min-w-full divide-y divide-gray-200 statement-table">
                                     <thead>
                                         <tr>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                                          
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>                                          
                                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
                                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deposits</th>
                                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Withdrawals</th>
@@ -158,7 +164,7 @@
                                                 $balance += $deposit - $withdrawal;
                                             @endphp
                                             <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ \Carbon\Carbon::parse($saving->transaction_date)->toFormattedDateString() }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"> {{ \Carbon\Carbon::parse($saving->transaction_date)->format('d M Y') }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $saving->remarks }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">
                                                     {{ $deposit ? number_format($deposit, 2) : '-' }}
@@ -185,5 +191,18 @@
                 @endif
             </main>
         </div>
+
+        <script>
+    document.getElementById('printStatementBtn').addEventListener('click', function () {
+        const printContent = document.getElementById('statementPreview').innerHTML;
+        const originalContent = document.body.innerHTML;
+
+        document.body.innerHTML = printContent;
+        window.print();
+        document.body.innerHTML = originalContent;
+        location.reload(); // optional: refresh to restore JS events and full layout
+    });
+</script>
+
 
 @endsection

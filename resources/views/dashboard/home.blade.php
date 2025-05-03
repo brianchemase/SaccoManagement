@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="main-content flex-1 overflow-y-auto ml-64 main-content-container">
+    <br>
             <!-- Dashboard Content -->
             <main class="p-6">
                 <!-- Stats Cards -->
@@ -12,7 +13,7 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-gray-500">Total Members</p>
-                                <h3 class="text-3xl font-bold text-gray-800">1,248</h3>
+                                <h3 class="text-3xl font-bold text-gray-800">{{ $statusCounts['active'] ?? 0 }}</h3>
                                 <p class="text-green-500 flex items-center mt-1">
                                     <i class="fas fa-arrow-up mr-1"></i> 12.5% from last month
                                 </p>
@@ -27,7 +28,7 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-gray-500">Total Savings</p>
-                                <h3 class="text-3xl font-bold text-gray-800">$2.4M</h3>
+                                <h3 class="text-3xl font-bold text-gray-800">KSH {{ number_format($totalSavings, 2) }}</h3>
                                 <p class="text-green-500 flex items-center mt-1">
                                     <i class="fas fa-arrow-up mr-1"></i> 8.2% from last month
                                 </p>

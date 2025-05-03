@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class SavingsController extends Controller
 {
@@ -31,6 +32,7 @@ class SavingsController extends Controller
 
     public function statement(Request $request)
         {
+            $now = Carbon::now();
             $members = DB::table('members')->orderBy('full_name')->get();
             $savings = collect(); // default empty collection
 
@@ -72,6 +74,7 @@ class SavingsController extends Controller
             }
 
             $data = [
+                'now' => $now,
                 'pagetitle' => 'Member Savings Statement',
                 'members' => $members,
                 'savings' => $savings,

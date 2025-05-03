@@ -62,6 +62,12 @@
         .main-content-container {
             margin-top: 72px;
         }
+
+        @media print {
+        .no-print {
+            display: none !important;
+        }
+    }
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
