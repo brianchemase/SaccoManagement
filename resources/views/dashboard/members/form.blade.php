@@ -21,7 +21,7 @@
     </div>
     <div class="col-md-6 mb-3">
         <label for="date_joined">Date Joined</label>
-        <input type="date" name="date_joined" class="form-control" value="{{ old('date_joined', isset($member) ? $member->date_joined : '') }}" required>
+        <input type="date" name="date_joined" class="form-control" max="{{ date('Y-m-d') }}" value="{{ old('date_joined', isset($member) ? $member->date_joined : '') }}" required>
     </div>
     <div class="col-md-6 mb-3">
         <label for="status">Status</label>

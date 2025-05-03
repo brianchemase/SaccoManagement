@@ -137,6 +137,15 @@
                                 </thead>
                                 <tbody id="tableBody">
                                 @foreach($members as $member)
+                                    @php
+                                        $statusColor = match($member->status) {
+                                            'active' => 'success',
+                                            'dormant' => 'secondary',
+                                            'exited' => 'danger',
+                                            default => 'dark',
+                                        };
+                                    @endphp
+                               
                                     <tr>
                                         <td>{{ $member->member_no }}</td>
                                         <td>{{ $member->full_name }}</td>
@@ -144,7 +153,12 @@
                                         <td>{{ $member->email }}</td>
                                         <td>{{ $member->id_number }}</td>
                                         <td>{{ $member->date_joined }}</td>
-                                        <td>{{ ucfirst($member->status) }}</td>
+                                        <td>
+
+                                                <span class="badge bg-{{ $statusColor }}">
+                                                    {{ ucfirst($member->status) }}
+                                                </span>
+                                        </td>
                                         <td>
                                             <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                                 data-bs-target="#editModal{{ $member->id }}">
@@ -170,7 +184,7 @@
                                                         @include('dashboard.members.form', ['member' => $member])
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-primary">Update</button>
+                                                        <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i> Edit Member</button>
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                                     </div>
                                                 </form>

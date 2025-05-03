@@ -97,12 +97,12 @@ class MembershipController extends Controller
         ]);
 
         DB::table('members')->where('id', $id)->update([
-            'member_no' => $request->member_no,
+           // 'member_no' => $request->member_no,
             'full_name' => $request->full_name,
             'phone' => $request->phone,
             'email' => $request->email,
             'id_number' => $request->id_number,
-            'date_joined' => $request->date_joined,
+            //'date_joined' => $request->date_joined,
             'status' => $request->status ?? 'active',
             //'updated_at' => now(),
         ]);
