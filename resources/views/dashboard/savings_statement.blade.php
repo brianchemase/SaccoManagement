@@ -17,9 +17,9 @@
                                 <label for="memberSelect" class="block text-sm font-medium text-gray-700">Select Member</label>
                                 <select name="member_id" id="memberSelect" class="member-select mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
                                     <option value="">-- Select Member --</option>
-                                    @foreach($members as $member)
-                                        <option value="{{ $member->id }}" {{ $selected_member == $member->id ? 'selected' : '' }}>
-                                            {{ $member->full_name }} ({{ $member->member_no }})
+                                    @foreach($members as $memberdata)
+                                        <option value="{{ $memberdata->id }}" {{ $selected_member == $memberdata->id ? 'selected' : '' }}>
+                                            {{ $memberdata->full_name }} ({{ $memberdata->member_no }})
                                         </option>
                                     @endforeach
                                 </select>
@@ -78,6 +78,11 @@
                         <button id="printStatementBtn" class="no-print px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center">
                             <i class="fas fa-print mr-2"></i> Print Statement
                         </button>
+
+                        <a href="{{ route('singlememberstatement', ['memberno' => $member->id]) }}"
+                            class="no-print px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"><i class="fas fa-file mr-2"></i>
+                                View Statement
+                        </a>
                     </div>
                     
                     <!-- Statement Header -->

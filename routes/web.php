@@ -49,6 +49,10 @@ Route::post('/savings/store', [SavingsController::class, 'store'])->name('saving
 Route::get('savings/statement', [SavingsController::class, 'statement'])->name('savings.statement');
 
 
+//savings statement
+Route::GET('/client/statement/{memberno}', [SavingsController::class, 'tablestatement'])->name('singlememberstatement');
+
+
 
 //loan management routes
 Route::get('/loans', [DashboardController::class, 'loans'])->name('loans');
