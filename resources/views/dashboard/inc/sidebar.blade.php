@@ -41,7 +41,7 @@
                                     <a href="{{ route('loans') }}" class="block px-4 py-2 rounded hover:bg-blue-600 text-white">Loan Dashboard</a>
                                     <a href="{{ route('loans.create') }}" class="block px-4 py-2 rounded hover:bg-blue-600 text-white">Loan Register</a>
                                     <a href="{{ route('repayments.create') }}" class="block px-4 py-2 rounded hover:bg-blue-600 text-white">Loan Repayment</a>
-                                    <a href="{{ route('loans') }}" class="block px-4 py-2 rounded hover:bg-blue-600 text-white"> Loan Statement</a>
+                                    <a href="{{ route('loan.statement') }}" class="block px-4 py-2 rounded hover:bg-blue-600 text-white"> Loan Statement</a>
                                 </div>
                             </div>
                             <!-- Dropdown End -->

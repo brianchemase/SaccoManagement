@@ -186,21 +186,74 @@ class DashboardController extends Controller
         return view('dashboard.savings-statement')->with($data);
     }
 
-    public function loanStatement() {
-        $contributions="";
+    public function loanStatement(Request $request) {
+        $now = Carbon::now();
+
+        $repayments = collect(); // default empty collection
+        $loan = collect();// default empty collection
+        $totalPaid = collect();// default empty collection
+        $balance = collect();// default empty collection
+        $runningRepayments = collect();// default empty collection
+        $originalAmount = collect();// default empty collection
+
+        if ($request->loan_id) {
+            $loan = DB::table('loans')
+            ->join('members', 'loans.member_id', '=', 'members.id')
+            ->select('loans.*', 'members.*')
+            ->where('loans.id', $request->loan_id)
+            ->first();
+
+
+            $repayments = DB::table('loan_repayments')
+                            ->where('loan_id', $request->loan_id)
+                            ->orderBy('payment_date')
+                            ->get();
+
+            // Calculate total repaid
+            $totalPaid = $repayments->sum('amount_paid');
+
+            // Calculate balance
+           $balance = $loan->amount_requested - $totalPaid;
+
+
+           $originalAmount = $loan->amount_approved; // This should be total due after interest
+           $runningBalance = $originalAmount;
+           $runningRepayments = [];
+
+           foreach ($repayments as $repayment) {
+               $runningBalance -= $repayment->amount_paid;
+
+               $runningRepayments[] = (object) [
+                   'payment_date' => $repayment->payment_date,
+                   'amount_paid' => $repayment->amount_paid,
+                   'payment_method' => $repayment->payment_method,
+                   'remarks' => $repayment->remarks,
+                   'balance_after' => $runningBalance
+               ];
+           }
+
+        }
+
         $members = DB::table('members')->select('id', 'full_name')->get();
 
         $loans = DB::table('loans')
             ->join('members', 'loans.member_id', '=', 'members.id')
-            ->select('loans.id', 'loans.loan_type', 'loans.amount_approved', 'members.full_name')
+            ->select('loans.id', 'loans.loan_type', 'loans.amount_approved','loans.*', 'members.*')
             ->orderBy('loans.id', 'desc')
             ->get();
+
+           // return $loans;
 
     
         $data = [
             'members' => $members,
             'loans' => $loans,
-            'pagetitle' => "Loan Statement ",
+            'loanData' => $repayments,
+            'repayments' => $runningRepayments,
+            'totalPaid' => $totalPaid,
+            'originalPrincipleAmount' => $originalAmount,
+            'loanbalance' => $balance,
+            'pagetitle' => "Loan Statement - Generate loan statement",
         ];
         return view('dashboard.loan_statement')->with($data);
     }
