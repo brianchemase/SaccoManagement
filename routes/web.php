@@ -29,7 +29,7 @@ Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
 
 
 //Route::get('/savings-statement', [DashboardController::class, 'savingsStatement'])->name('savings.statement');
-Route::get('/loan-statement', [DashboardController::class, 'loanStatement'])->name('loan.statement');
+
 Route::get('/transactions', [DashboardController::class, 'transactions'])->name('transactions');
 Route::get('/reports', [DashboardController::class, 'reports'])->name('reports');
 Route::get('/settings', [DashboardController::class, 'settings'])->name('settings');
@@ -68,6 +68,14 @@ Route::delete('/loans/{id}', [LoanController::class, 'destroy'])->name('loans.de
 // Loan Repayment Routes
 Route::get('/repayments/create', [LoanController::class, 'LoanRepayment'])->name('repayments.create');
 Route::post('/repayments/store', [LoanController::class, 'RegisterRepayment'])->name('repayments.store');
+
+//get loan statement
+Route::any('/loan/statement/{loan_id}', [LoanController::class, 'loanStatement'])->name('generateloan.statement');
+Route::get('admins/loan/statement', [LoanController::class, 'loanStatement'])->name('makeloan.statement');
+
+
+Route::get('/loan-statement', [DashboardController::class, 'loanStatement'])->name('loan.statement');
+
 
 
   }

@@ -142,6 +142,7 @@
                                             <td>{{ \Carbon\Carbon::parse($loan->application_date)->toFormattedDateString() }}</td>
                                             <td>
                                                 <a href="{{ route('loans.show', $loan->id) }}" class="btn btn-sm btn-primary">View</a>
+                                                <a href="{{ route('generateloan.statement', $loan->id) }}" class="btn btn-outline-primary mb-3">Generate Statement</a>
                                             </td>
                                         </tr>
                                         @empty

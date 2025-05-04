@@ -188,13 +188,21 @@ class DashboardController extends Controller
 
     public function loanStatement() {
         $contributions="";
-        
+        $members = DB::table('members')->select('id', 'full_name')->get();
+
+        $loans = DB::table('loans')
+            ->join('members', 'loans.member_id', '=', 'members.id')
+            ->select('loans.id', 'loans.loan_type', 'loans.amount_approved', 'members.full_name')
+            ->orderBy('loans.id', 'desc')
+            ->get();
+
+    
         $data = [
-            'contributions' => $contributions,
-            'stations' => "",
-            'pagetitle' => "",
+            'members' => $members,
+            'loans' => $loans,
+            'pagetitle' => "Loan Statement ",
         ];
-        return view('dashboard.loan-statement')->with($data);
+        return view('dashboard.loan_statement')->with($data);
     }
 
     public function transactions() {
