@@ -203,7 +203,7 @@ class DashboardController extends Controller
             ->where('loans.id', $request->loan_id)
             ->first();
 
-
+           
             $repayments = DB::table('loan_repayments')
                             ->where('loan_id', $request->loan_id)
                             ->orderBy('payment_date')
@@ -236,18 +236,20 @@ class DashboardController extends Controller
 
         $members = DB::table('members')->select('id', 'full_name')->get();
 
-        $loans = DB::table('loans')
-            ->join('members', 'loans.member_id', '=', 'members.id')
-            ->select('loans.id', 'loans.loan_type', 'loans.amount_approved','loans.*', 'members.*')
-            ->orderBy('loans.id', 'desc')
-            ->get();
+        $systemloans = DB::table('loans')
+                ->join('members', 'loans.member_id', '=', 'members.id')
+                ->select('loans.*', 'members.full_name', 'members.id_number', 'members.member_no', 'members.phone', 'members.email', 'members.date_joined')
+                ->distinct()
+                ->orderBy('loans.id', 'desc')
+                ->get();
 
            // return $loans;
 
     
         $data = [
             'members' => $members,
-            'loans' => $loans,
+            'systemloans' => $systemloans,
+            'loan' => $loan,
             'loanData' => $repayments,
             'repayments' => $runningRepayments,
             'totalPaid' => $totalPaid,

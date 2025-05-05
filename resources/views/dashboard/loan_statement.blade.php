@@ -18,8 +18,8 @@
                                 <label for="memberSelect" class="block text-sm font-medium text-gray-700">Select Loan Profile</label>
                                 <select name="loan_id" id="memberSelect" class="member-select mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
                                     <option value="">-- Select Loan --</option>
-                                        @foreach($loans as $loan)
-                                            <option value="{{ $loan->id }}">{{ $loan->full_name }} - {{ $loan->id }}</option>
+                                        @foreach($systemloans as $loandata)
+                                            <option value="{{ $loandata->id }}">{{ $loandata->full_name }} - {{ $loandata->id }}</option>
                                         @endforeach
                                 </select>
                             </div>
@@ -86,19 +86,19 @@
                             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                                 <div class="bg-gray-50 p-4 rounded-lg">
                                     <p class="text-sm text-gray-500">Principal Amount</p>
-                                    <p class="text-xl font-bold text-gray-800">{{ $loan->amount_approved }}</p>
+                                    <p class="text-xl font-bold text-gray-800"> {{ number_format($loan->amount_approved, 2) }}</p>
                                 </div>
                                 <div class="bg-gray-50 p-4 rounded-lg">
                                     <p class="text-sm text-gray-500">Interest Rate</p>
-                                    <p class="text-xl font-bold text-gray-800">{{ $loan->interest_rate }}</p>
+                                    <p class="text-xl font-bold text-gray-800">{{ $loan->interest_rate }}%</p>
                                 </div>
                                 <div class="bg-gray-50 p-4 rounded-lg">
                                     <p class="text-sm text-gray-500">Total Repaid</p>
-                                    <p class="text-xl font-bold text-green-600">{{ $totalPaid }}</p>
+                                    <p class="text-xl font-bold text-green-600"> {{ number_format($totalPaid, 2) }}</p>
                                 </div>
                                 <div class="bg-gray-50 p-4 rounded-lg">
                                     <p class="text-sm text-gray-500">Outstanding Balance</p>
-                                    <p class="text-xl font-bold text-red-600">{{ $loanbalance }}</p>
+                                    <p class="text-xl font-bold text-red-600"> {{ number_format($loanbalance, 2) }}</p>
                                 </div>
                             </div>
                         </div>
