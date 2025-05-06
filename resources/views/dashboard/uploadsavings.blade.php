@@ -12,6 +12,11 @@
 
         @include('dashboard.inc.display')
 
+        @if(session('error'))
+           
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
         <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
             <form action="{{ route('savings.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf

@@ -220,9 +220,12 @@ class SavingsController extends Controller
             'file' => 'required|mimes:xlsx,xls,csv',
         ]);
 
-        Excel::import(new SavingsImport, $request->file('file'));
-
-        return redirect()->back()->with('success', 'Savings records imported successfully!');
+        try {
+            Excel::import(new SavingsImport, $request->file('file'));
+            return redirect()->back()->with('success', 'Savings records imported successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
 
