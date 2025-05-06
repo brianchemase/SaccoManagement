@@ -57,14 +57,14 @@
                 <th scope="row">Repayment Amount</th>
                 <td>{{ number_format($loan->amount_approved) }}</td>
                 <th scope="row">Monthly Installments:</td>
-                <td>Installments</td>
+                <td>{{ number_format($loan->monthly_installments) }}</td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <th scope="row">Loan Application Fee</th>
                 <td>Fee </td>
                 <th scope="row">Loan End Date:</td>
                 <td> End date</td>
-            </tr>
+            </tr> -->
         </tbody>
         </table>
 

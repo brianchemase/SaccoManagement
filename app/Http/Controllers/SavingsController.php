@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Imports\SavingsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Response;
 use Carbon\Carbon;
 
 class SavingsController extends Controller
@@ -202,9 +203,7 @@ class SavingsController extends Controller
 
     public function showUploadForm()
     {
-        
-        
-        
+                
         $data = [
             'pagetitle' => 'Member Savings Upload',
             
@@ -225,6 +224,18 @@ class SavingsController extends Controller
             return redirect()->back()->with('success', 'Savings records imported successfully!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function downloadTemplate()
+    {
+        $filePath = public_path('templates/Savings_Sacco_Templete_v1.2.xlsx'); // adjust as needed
+        $fileName = 'Savings_Sacco_Templete_v1.2.xlsx';
+
+        if (file_exists($filePath)) {
+            return Response::download($filePath, $fileName);
+        } else {
+            abort(404, 'Template not found.');
         }
     }
 

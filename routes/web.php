@@ -50,6 +50,7 @@ Route::get('savings/statement', [SavingsController::class, 'statement'])->name('
 //savigs upload
 Route::get('/savings/upload', [SavingsController::class, 'showUploadForm'])->name('savings.upload');
 Route::post('/savings/import', [SavingsController::class, 'import'])->name('savings.import');
+Route::get('/members/download-template', [SavingsController::class, 'downloadTemplate'])->name('members.download-template');
 
 
 //savings statement

@@ -38,6 +38,9 @@ class LoanController extends Controller
             'term_months' => $request->term_months,
             'interest_rate' => $request->interest_rate,
             'amount_requested' => $request->amount_requested,
+            'amount_approved' => $request->amount_to_repay,
+            'monthly_installments' => $request->monthly_installment,
+            'status' => "approved",
             'application_date' => $request->application_date,
             'disbursement_date' => now(),
             //'updated_at' => now()

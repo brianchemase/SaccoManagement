@@ -17,6 +17,26 @@
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
 
+
+         
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                            <div>
+                                <h2 class="text-lg font-semibold text-gray-800 mb-2">Sacco Template</h2>
+                                <p class="text-gray-500">Download the sacco template to use for transactions to upload bulk savings</p>
+                            </div>
+                       
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                                               
+                                    <a href="{{ route('members.download-template') }}" class="btn btn-outline-primary my-2">
+                                        Download Template
+                                    </a>
+                            </div>                                                         
+                        </div>
+                    </div>
+              
+                          
+
         <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
             <form action="{{ route('savings.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
