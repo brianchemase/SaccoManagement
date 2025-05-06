@@ -47,6 +47,9 @@ Route::get('/savings', [DashboardController::class, 'savings'])->name('savings')
 Route::post('/savings/store', [SavingsController::class, 'store'])->name('savings.store');
 //member statements
 Route::get('savings/statement', [SavingsController::class, 'statement'])->name('savings.statement');
+//savigs upload
+Route::get('/savings/upload', [SavingsController::class, 'showUploadForm'])->name('savings.upload');
+Route::post('/savings/import', [SavingsController::class, 'import'])->name('savings.import');
 
 
 //savings statement
