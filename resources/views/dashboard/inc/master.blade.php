@@ -24,6 +24,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="{{ asset('css/sweetalert/sweetalert2.min.css') }}">
+<script src="{{ asset('css/sweetalert/sweetalert2.all.min.js') }}"></script>
+
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .sidebar {
