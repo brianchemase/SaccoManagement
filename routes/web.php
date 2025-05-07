@@ -84,3 +84,6 @@ Route::get('/loan-statement', [DashboardController::class, 'loanStatement'])->na
 
   }
     );
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
