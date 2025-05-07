@@ -8,6 +8,12 @@
 <link rel="stylesheet" href="css/login/style.css">
 <link rel="stylesheet" href="{{ asset('css/login/style.css') }}">
 
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="{{ asset('css/sweetalert/sweetalert2.min.css') }}">
+<script src="{{ asset('css/sweetalert/sweetalert2.all.min.js') }}"></script>
+ 
+</head>
+
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -16,7 +22,11 @@
 		<div class="screen__content">
             @if(Session::get('error'))
             <div class="alert alert-danger">
-                {{ Session::get('error') }}
+               
+                <script>
+                    sweetAlert("Error...", "{{ Session::get("error") }}", "error");
+                </script>
+               
             </div>
             @endif
 
