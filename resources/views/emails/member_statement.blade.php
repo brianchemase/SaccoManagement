@@ -120,7 +120,7 @@
         </div>
         
         <div class="footer">
-            <p>© 2023 Your Sacco. All rights reserved.</p>
+            <p>© 2025 Your Sacco. All rights reserved.</p>
         </div>
     </div>
 </body>
