@@ -69,6 +69,19 @@
                             <i class="fas fa-cog mr-3"></i>
                             <span class="sidebar-text">Settings</span>
                         </a>
+
+                        <a href="{{ route('logout') }}" 
+                            onclick="event.preventDefault(); 
+                            document.getElementById('logout-form').submit();" 
+                            class="flex items-center px-4 py-3 hover:bg-blue-700 rounded-lg text-white">
+                            <i class="fas fa-sign-out-alt mr-3"></i>
+                            <span class="sidebar-text">Logout</span>
+                        </a>
+
+                         <!-- Hidden logout form -->
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                     </div>
                 </nav>
             
@@ -77,8 +90,8 @@
                 <div class="flex items-center">
                     <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile" class="w-10 h-10 rounded-full">
                     <div class="ml-3 sidebar-text">
-                        <div class="font-medium">Jane Cooper</div>
-                        <div class="text-sm text-blue-200">Admin</div>
+                        <div class="font-medium">{{ Auth::user()->name }}</div>
+                        <div class="text-sm text-blue-200">Official</div>
                     </div>
                 </div>
             </div>
