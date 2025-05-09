@@ -27,6 +27,11 @@
                             <span class="sidebar-text">Savings</span>
                         </a>
 
+                        <a href="{{ route('savings.preferences') }}" class="flex items-center px-4 py-3 hover:bg-blue-700 rounded-lg text-white">
+                            <i class="fas fa-wallet mr-3"></i>
+                            <span class="sidebar-text">Savings Pref</span>
+                        </a>
+
                         <a href="{{ route('savings.upload') }}" class="flex items-center px-4 py-3 hover:bg-blue-700 rounded-lg text-white">
                             <i class="fas fa-file-invoice-dollar mr-3"></i>
                             <span class="sidebar-text">Upload Savings</span>

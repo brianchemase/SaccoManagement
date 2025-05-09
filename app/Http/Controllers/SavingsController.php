@@ -240,4 +240,131 @@ class SavingsController extends Controller
     }
 
 
+    public function savingsetuppage() 
+    {
+
+        $now = Carbon::now();
+        $startOfMonth = $now->copy()->startOfMonth();
+        $startOfLastMonth = $now->copy()->subMonth()->startOfMonth();
+        $endOfLastMonth = $now->copy()->subMonth()->endOfMonth();
+
+         // Total savings (deposits)
+            $totalSavings = DB::table('savings')
+            ->where('transaction_type', 'deposit')
+            ->sum('amount');
+
+        // Total withdrawals
+        $totalWithdrawals = DB::table('savings')
+            ->where('transaction_type', 'withdrawal')
+            ->sum('amount');
+
+        // This month's savings
+        $thisMonthSavings = DB::table('savings')
+            ->where('transaction_type', 'deposit')
+            ->whereBetween('transaction_date', [$startOfMonth->toDateString(), $now->toDateString()])
+            ->sum('amount');
+
+        // Last month's savings
+        $lastMonthSavings = DB::table('savings')
+            ->where('transaction_type', 'deposit')
+            ->whereBetween('transaction_date', [$startOfLastMonth->toDateString(), $endOfLastMonth->toDateString()])
+            ->sum('amount');
+
+        // Load members and savings for the view
+        $savings = DB::table('savings')
+                    ->join('members', 'savings.member_id', '=', 'members.id')
+                    ->select('savings.*', 'members.full_name')
+                    ->orderByDesc('savings.id')
+                    ->get();
+
+        $preferences = DB::table('preferred_savings as ps')
+        ->join('members as m', 'm.id', '=', 'ps.member_id')
+        ->where('ps.status', 'active')
+        ->select('ps.*', 'm.full_name', 'm.email')
+        ->get();
+
+
+
+
+        $contributions="";
+
+        $savings = DB::table('savings')
+        ->join('members', 'savings.member_id', '=', 'members.id')
+        ->select('savings.*', 'members.full_name')
+        ->orderByDesc('savings.id')
+        ->get();
+
+        $members = DB::table('members')->orderBy('full_name')->get();
+
+        
+        $data = [
+            'contributions' => $contributions,
+            'now' => $now,
+            'savings' => $savings,
+            'members' => $members,
+            'preferences' => $preferences,
+            'stations' => "",
+            'pagetitle' => "Members Savings Preference",
+            'totalSavings' => $totalSavings,
+            'totalWithdrawals' => $totalWithdrawals,
+            'thisMonthSavings' => $thisMonthSavings,
+            'lastMonthSavings' => $lastMonthSavings,
+        ];
+        return view('dashboard.savings_pref')->with($data);
+    }
+
+
+    public function storepreferences(Request $request)
+    {
+        $request->validate([
+            'member_id' => 'required|exists:members,id',
+            'preferred_amount' => 'required|numeric|min:1',
+            'effective_from' => 'required|date',
+        ]);
+
+        // Check if member already has a preference
+        $existing = DB::table('preferred_savings')->where('member_id', $request->member_id)->first();
+
+        if ($existing) {
+            //return redirect()->back()->with('error', 'This member already has a savings preference.');
+            return back()->with('error', 'This member already has a savings preference.');
+        }
+
+        // Inactivate previous
+        DB::table('preferred_savings')
+            ->where('member_id', $request->member_id)
+            ->where('status', 'active')
+            ->update(['status' => 'inactive']);
+
+        // Insert new
+        DB::table('preferred_savings')->insert([
+            'member_id' => $request->member_id,
+            'preferred_amount' => $request->preferred_amount,
+            'effective_from' => $request->effective_from,
+            'status' => 'active',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return back()->with('success', 'Savings Preference saved successfully.');       
+    }
+
+    public function updatepreferences(Request $request, $id)
+    {
+        $request->validate([
+            'preferred_amount' => 'required|numeric|min:1',
+            'effective_from' => 'required|date',
+        ]);
+
+        DB::table('preferred_savings')->where('id', $id)->update([
+            'preferred_amount' => $request->preferred_amount,
+            'effective_from' => $request->effective_from,
+            'updated_at' => now(),
+        ]);
+        
+        return back()->with('success', 'Savings Preference updated successfully.');
+
+    }
+
+
 }

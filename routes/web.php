@@ -51,6 +51,12 @@ Route::middleware(['auth','user-role:admin'])->group(function()
     Route::post('/savings/import', [SavingsController::class, 'import'])->name('savings.import');
     Route::get('/members/download-template', [SavingsController::class, 'downloadTemplate'])->name('members.download-template');
 
+
+    Route::get('/savings/preferences', [SavingsController::class, 'savingsetuppage'])->name('savings.preferences');
+    Route::post('/savings/preferences', [SavingsController::class, 'storepreferences'])->name('savings.preferences.store');
+    Route::post('/savings/preferences/{id}/update', [SavingsController::class, 'updatepreferences'])->name('savings.preferences.update');
+
+
     //savings statement
     Route::GET('/client/statement/{memberno}', [SavingsController::class, 'tablestatement'])->name('singlememberstatement');
 
