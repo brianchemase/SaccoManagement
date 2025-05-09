@@ -19,7 +19,11 @@
                             <h2 class="text-lg font-semibold text-gray-800 mb-2">Members Savings Preference</h2>
                             <p class="text-gray-500">Register and update the member's prefered savings</p>
                         </div>
-                        <div class="flex flex-col sm:flex-row gap-3">                           
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            
+                            <a href="{{ route('export.savings.preferences') }}" class="btn btn-success">
+                                Export Preferences to Excel
+                            </a>
 
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">
                                 <i class="fa fa-plus-circle"></i> Register Savings Preference

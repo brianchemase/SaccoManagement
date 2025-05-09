@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Imports\SavingsImport;
+use App\Exports\SavingsPreferencesExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Response;
@@ -365,6 +366,11 @@ class SavingsController extends Controller
         return back()->with('success', 'Savings Preference updated successfully.');
 
     }
+
+    public function exportPreferencesExcel()
+        {
+            return Excel::download(new SavingsPreferencesExport, 'savings_preferences.xlsx');
+        }
 
 
 }

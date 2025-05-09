@@ -56,6 +56,10 @@ Route::middleware(['auth','user-role:admin'])->group(function()
     Route::post('/savings/preferences', [SavingsController::class, 'storepreferences'])->name('savings.preferences.store');
     Route::post('/savings/preferences/{id}/update', [SavingsController::class, 'updatepreferences'])->name('savings.preferences.update');
 
+    //savings prederence export
+    Route::get('/export/savings-preferences', [SavingsController::class, 'exportPreferencesExcel'])->name('export.savings.preferences');
+
+
 
     //savings statement
     Route::GET('/client/statement/{memberno}', [SavingsController::class, 'tablestatement'])->name('singlememberstatement');
