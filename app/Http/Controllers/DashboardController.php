@@ -41,17 +41,29 @@ class DashboardController extends Controller
 
     public function members() 
     {
-        $contributions="";
-        $members = DB::table('members')->get();
+            $contributions="";
+            $members = DB::table('members')->get();
 
              // Count all members
             $totalMembers = DB::table('members')->count();
 
-            // Count members by status
-            $statusCounts = DB::table('members')
+                // Count members by status
+                $statusCounts = DB::table('members')
                 ->select('status', DB::raw('count(*) as total'))
                 ->groupBy('status')
                 ->pluck('total', 'status');
+
+                $lastMember = DB::table('members')
+                ->orderBy('id', 'desc')
+                ->first();
+
+                // Determine the next member number
+                $nextMemberNumber = '001'; // default for the first member
+                if ($lastMember && isset($lastMember->member_no)) {
+                    $lastNumber = intval($lastMember->member_no);
+                    $nextMemberNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+                }
+                //return $nextMemberNumber;
 
         
         $data = [
@@ -59,6 +71,7 @@ class DashboardController extends Controller
             'members' => $members,
             'totalMembers' => $totalMembers,
             'statusCounts' => $statusCounts,
+            'nextMemberNumber' => $nextMemberNumber, // 👈 pass to view
             'pagetitle' => "Members Management",
         ];
         return view('dashboard.members')->with($data);

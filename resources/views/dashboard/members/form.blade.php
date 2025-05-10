@@ -1,7 +1,8 @@
 <div class="row">
     <div class="col-md-6 mb-3">
         <label for="member_no">Member No</label>
-        <input type="text" name="member_no" class="form-control" value="{{ old('member_no', $member->member_no ?? '') }}" required>
+        <!-- <input type="text" name="member_no" class="form-control" value="{{ old('member_no', $member->member_no ?? '') }}" required> -->
+        <input type="text" name="member_no" class="form-control" value="{{ $nextMemberNumber }}" readonly>
     </div>
     <div class="col-md-6 mb-3">
         <label for="full_name">Full Name</label>
