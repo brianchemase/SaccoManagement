@@ -215,7 +215,7 @@
         });
     </script>
 
-        <script>
+    <script>
         document.getElementById("searchInput").addEventListener("keyup", function() {
             let filter = this.value.toUpperCase();
             let rows = document.querySelectorAll("#tableBody tr");
@@ -225,7 +225,7 @@
                 row.style.display = text.includes(filter) ? "" : "none";
             });
         });
-        </script>
+    </script>
 
         <script>
             new DataTable('#example');

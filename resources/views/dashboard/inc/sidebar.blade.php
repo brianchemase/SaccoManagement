@@ -74,6 +74,14 @@
                             <i class="fas fa-cog mr-3"></i>
                             <span class="sidebar-text">Settings</span>
                         </a>
+                       
+
+                        @if(Auth::user()->role == "admin")
+                                <a href="{{ route('users.index') }}" class="flex items-center px-4 py-3 hover:bg-blue-700 rounded-lg text-white">
+                                    <i class="fas fa-users mr-3"></i>
+                                    <span class="sidebar-text">Users Management</span>
+                                </a>
+                        @endif
 
                         <a href="{{ route('logout') }}" 
                             onclick="event.preventDefault(); 
@@ -95,7 +103,7 @@
                 <div class="flex items-center">
                     <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile" class="w-10 h-10 rounded-full">
                     <div class="ml-3 sidebar-text">
-                        <div class="font-medium">{{ Auth::user()->name }}</div>
+                        <div class="font-medium">{{ Auth::user()->name }} {{ Auth::user()->role }}</div>
                         <div class="text-sm text-blue-200">Official</div>
                     </div>
                 </div>

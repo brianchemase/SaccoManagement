@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\SavingsController;
 use App\Http\Controllers\LoanController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -85,6 +86,14 @@ Route::middleware(['auth','user-role:admin'])->group(function()
     Route::get('admins/loan/statement', [LoanController::class, 'loanStatement'])->name('makeloan.statement');
 
     Route::get('/loan-statement', [DashboardController::class, 'loanStatement'])->name('loan.statement');
+
+
+
+    // users management  
+    Route::get('/Listusers', [UserController::class, 'index'])->name('users.index');
+    Route::post('/update-user', [UserController::class, 'updateUser'])->name('update_user');
+    Route::any('/users/{user}/change-password', [UserController::class, 'changePassword'])->name('change_password');
+    Route::post('/Userregister', [UserController::class, 'registerUser'])->name('registerUser');
 
 
 
