@@ -33,16 +33,10 @@
         </div>
         <div class="modal-body">
             <h4 class="text-center">Client number: {{$user->id}} </h4>
-            <h5 >Name: {{$user->name}}</h5>
-            
+            <h5 >Name: {{$user->name}}</h5>            
             <h5 >Phone: {{$user->phone}}</h5>
-            <h5 >Email: {{$user->email}}</h5> 
-            <h5 >Country: {{$user->country}}</h5> 
-            <h5 >Position: {{$user->position}}</h5> 
-            
-
-                                                
-          
+            <h5 >Email: {{$user->email}}</h5>        
+            <h5 >Position: {{$user->role}}</h5>           
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -88,10 +82,7 @@
                     <div class="col-md-6">
                         <label for="editCountry" class="form-label">lastupdate</label>
                         <input type="text" class="form-control" id="editCountry" placeholder="Enter Country" value="{{ $user->updated_at }}" required>
-                    </div>
-
-                    
-
+                    </div>                  
                     
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -103,8 +94,6 @@
     </div>
 </div>
 <!-- END edit user modal -->
-
-
 
 
 <!-- Change Password Modal -->
