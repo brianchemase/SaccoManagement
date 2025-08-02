@@ -7,6 +7,8 @@ use App\Http\Controllers\SavingsController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\UserController;
 
+use App\Http\Controllers\SendEmailController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,10 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/registerForemail', [SendEmailController::class, 'showForm'])->name('formregister');
+Route::post('/sendemail', [SendEmailController::class, 'sendEmails'])->name('register.send');
 
 Auth::routes();
 
