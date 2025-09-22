@@ -29,7 +29,10 @@ class PyrethrumIntroductionMail extends Mailable
     public function build()
     {
         return $this->subject('Partnership Inquiry – Premium Pyrethrum Extract from Kenya')
-                    ->markdown('emails.pyrethrum');
+                    ->markdown('emails.pyrethrum')
+                    ->with([
+                        'name' => $this->name,
+                    ]);
     }
 
     
