@@ -76,14 +76,15 @@
 </head>
 <body>
     <div class="container">
-        <img src="https://i.ibb.co/N68Bkyhb/a9028984-ee00-492b-91c8-ebdad15f98ce.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=300" alt="Pyrethrum Fields" class="hero-image" style="width: 100%; height: auto; border-radius: 5px 5px 0 0; margin: -30px -30px 30px -30px; display: block; max-width: none;">
+        <img src="https://i.ibb.co/0jD7ZGJZ/pic.png?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=300" alt="Pyrethrum Fields" class="hero-image" style="width: 100%; height: auto; border-radius: 5px 5px 0 0; margin: -30px -30px 30px -30px; display: block; max-width: none;">
        
 
         <div class="header">
             <h1>Manna Tech Limited</h1>
         </div>
-                <img src="{{$message->embed(public_path().'/logo/qualitylogo.png')}}" style="max-width: 150px; display: block; margin-left: auto; margin-right: auto;">
+               
         <div class="content">
+            <br>
             <p>Dear {{ $name }},</p>
             <p>I am pleased to introduce Manna Tech Limited, a sustainable agriculture company revitalising Kenya’s pyrethrum sector. We are building a modern, integrated value chain - from seed innovation and farmer partnerships to processing of Pyrethrum Refined Extract (PRE) - to deliver reliable, high-quality natural insecticide products for regional and global markets. Our focus is on consistent supply, quality assurance and partnerships that strengthen the entire pyrethrum value chain.</p>
 
