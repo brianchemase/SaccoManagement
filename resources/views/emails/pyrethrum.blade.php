@@ -79,9 +79,7 @@
         <img src="https://i.ibb.co/0jD7ZGJZ/pic.png?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=300" alt="Pyrethrum Fields" class="hero-image" style="width: 100%; height: auto; border-radius: 5px 5px 0 0; margin: -30px -30px 30px -30px; display: block; max-width: none;">
        
 
-        <div class="header">
-            <h1>Manna Tech Limited</h1>
-        </div>
+    
                
         <div class="content">
             <br>
