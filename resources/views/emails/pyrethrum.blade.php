@@ -120,6 +120,9 @@
             <p><strong>Wilfred Davies</strong></p>
             <p>Cofounder - Manna Tech Limited</p>
             <p>+254748480588</p>
+             <p>
+                <a href="https://mannatech.co.ke/" target="_blank">https://mannatech.co.ke/</a>
+            </p>
             <p><a href="mailto:wilfred@mannatech.co.ke" style="color: #007bff; text-decoration: none;">wilfred@mannatech.co.ke</a></p>
         </div>
     </div>
