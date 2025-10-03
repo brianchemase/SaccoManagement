@@ -75,6 +75,7 @@
     </style>
 </head>
 <body>
+  <br>
     <div class="container">
         <img src="https://i.ibb.co/20mGMPcW/Cover-Photo.png?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=300" alt="Pyrethrum Fields" class="hero-image" style="width: 100%; height: auto; border-radius: 5px 5px 0 0; margin: -30px -30px 30px -30px; display: block; max-width: none;">
                
@@ -94,7 +95,7 @@
             <h2 class="section-title">Crude Oleoresin Specifications & Pricing</h2>
             <div class="specifications">
                 <ul>
-                    <li style="text-decoration: underline; text-decoration-color: orange; text-decoration-thickness: 2px;"><strong>Pyrethrin Content W/W minimum:</strong> <span >25%</span></li>
+                    <li><strong>Pyrethrin Content W/W minimum:</strong> <span >25%</span></li>
                     <li><strong>Preservative:</strong> BHT added</li>
                     <li><strong>Packaging:</strong> 25kg drums</li>
                     <li><strong>Price:</strong> Available upon request, depending on volume & terms (excluding delivery)</li>
@@ -105,7 +106,7 @@
             <h2 class="section-title">PRE Specifications & Pricing (illustrative)</h2>
             <div class="specifications">
                 <ul>
-                    <li style="text-decoration: underline; text-decoration-color: orange; text-decoration-thickness: 2px;"><strong>Total Pyrethrin Content:</strong> ≥ 50% w/w</li>
+                    <li><strong>Total Pyrethrin Content:</strong> ≥ 50% w/w</li>
                     <li><strong>Packaging:</strong> 25kg drums (or larger)</li>
                     <li><strong>Pricing:</strong> Available upon request, depending on volume & terms</li>
                     <li><strong>Export-ready, CoA and MSDS available</strong></li>
