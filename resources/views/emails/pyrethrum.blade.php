@@ -13,7 +13,12 @@
                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="max-width: 600px; background-color: #ffffff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
                     
                     <!-- Header -->
-                    <tr>
+                     <tr> 
+                        <td align="center"> 
+                            <img src="{{$message->embed(public_path().'/logo/Cover-Photo.png')}}" alt="Manna Tech Natural Crop Protection" width="600" style="display: block; width: 100%; max-width: 600px; height: auto;"> 
+                        </td> 
+                    </tr>
+                    <!-- <tr>
                         <td style="background-color: #FFAA00; padding: 48px 32px; text-align: center;">
                             <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold;">
                                 Manna Tech Limited
@@ -22,7 +27,7 @@
                                 Sustainable Crop Protection Solutions
                             </p>
                         </td>
-                    </tr>
+                    </tr> -->
                     
                     <!-- Main Content -->
                     <tr>
