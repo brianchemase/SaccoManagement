@@ -15,7 +15,7 @@
                     <!-- Header -->
                      <tr> 
                         <td align="center"> 
-                            <img src="{{$message->embed(public_path().'/logo/approved-cover.jpg')}}" alt="Manna Tech Natural Crop Protection" width="600" style="display: block; width: 100%; max-width: 600px; height: auto;"> 
+                            <img src="{{$message->embed(public_path().'/logo/approved-cover.png')}}" alt="Manna Tech Natural Crop Protection" width="600" style="display: block; width: 100%; max-width: 600px; height: auto;"> 
                         </td> 
                     </tr>
                     <!-- <tr>
